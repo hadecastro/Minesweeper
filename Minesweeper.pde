@@ -32,17 +32,17 @@ void setup ()
 public void setBombs()
 {
     //your code
-    
-     for(int r = 0; r < NUM_ROWS; r++)
+     while(bombs.size() <= 30)
      {
-        for(int c = 0; c < NUM_COLS; c++)
-        {
-            if(bombs.contains(buttons[r][c]) == false)
-            {
-                bombs.add(r, buttons[r][c]);
-            }      
-        }
+         int r = (int)(Math.random()*NUM_ROWS);
+         int c = (int)(Math.random()*NUM_COLS);
+
+         if(!bombs.contains(buttons[r][c]))
+         {
+            bombs.add(buttons[r][c]);
+         }   
      }
+
 }
 
 public void draw ()
@@ -122,6 +122,8 @@ public class MSButton
     public boolean isValid(int r, int c)
     {
         //your code here
+
+        //if(buttons[r][c])
         return false;
     }
     public int countBombs(int row, int col)
