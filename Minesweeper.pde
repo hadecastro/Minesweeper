@@ -12,7 +12,7 @@ private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons 
 
 void setup ()
 {
-    size(400, 400);
+    size(400, 420);
     textAlign(CENTER,CENTER);
     
     // make the manager
@@ -50,6 +50,9 @@ public void setBombs()
 public void draw ()
 {
     background( 0 );
+    fill(255);
+    text("# of spaces marked: "+numMarked, 70, 407);
+    text("# of bombs: "+ NUM_BOMBS, 360, 407);
     if(isWon())
         displayWinningMessage();
 
@@ -61,7 +64,7 @@ public boolean isWon()
      {
         for(int c = 0; c < NUM_COLS; c++)
         {
-            if(buttons[r][c].isClicked() == false && buttons[r][c].isMarked() == false)
+            if(buttons[r][c].isClicked() == false && buttons[r][c].isMarked() == false && numMarked != NUM_BOMBS)
             return false;        
         }
     }
@@ -70,6 +73,7 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     //your code here
+
     buttons[9][8].setLabel("Y");
     buttons[9][9].setLabel("o");
     buttons[9][10].setLabel("u");
@@ -84,13 +88,16 @@ public void displayWinningMessage()
 {
     //your code here
     if(isWon() == true)
-    buttons[9][8].setLabel("Y");
-    buttons[9][9].setLabel("o");
-    buttons[9][10].setLabel("u");
-    buttons[11][7].setLabel("W");
-    buttons[11][8].setLabel("i");
-    buttons[11][9].setLabel("n");
-    buttons[11][10].setLabel("!");
+    {
+        buttons[9][8].setLabel("Y");
+        buttons[9][9].setLabel("o");
+        buttons[9][10].setLabel("u");
+        buttons[11][8].setLabel("W");
+        buttons[11][9].setLabel("i");
+        buttons[11][10].setLabel("n");
+        buttons[11][11].setLabel("!");        
+    }
+
 }
 
 public class MSButton
@@ -99,7 +106,7 @@ public class MSButton
     private float x,y, width, height;
     private boolean clicked, marked;
     private String label;
-    
+        
     public MSButton ( int rr, int cc )
     {
         width = 400/NUM_COLS;
@@ -126,12 +133,20 @@ public class MSButton
     {
         clicked = true;
         //your code here
-        if(keyPressed == true)
+        if(mousePressed && mouseButton == RIGHT)
         {
             if(marked == true)
+            {
                 marked = false;
+                numMarked --;                
+            }
+
             else if (marked == false)
+            {
                 marked = true;
+                numMarked ++;            
+            }
+
             if(marked == false)
                 clicked = false;  
         }
@@ -180,11 +195,11 @@ public class MSButton
         if (marked)
             fill(0);
          else if( clicked && bombs.contains(this) ) 
-             fill(255,0,0);
+             fill(255,100,190);
         else if(clicked)
-            fill( 200 );
+            fill( 190, 200, 250 );
         else 
-            fill( 100 );
+            fill( 100, 100, 200 );
 
         rect(x, y, width, height);
         fill(0);
