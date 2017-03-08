@@ -34,7 +34,7 @@ void setup ()
 public void setBombs()
 {
     //your code
-     while(bombs.size() <= NUM_BOMBS)
+     while(bombs.size() < NUM_BOMBS)
      {
          int r = (int)(Math.random()*NUM_ROWS);
          int c = (int)(Math.random()*NUM_COLS);
@@ -73,7 +73,6 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     //your code here
-
     buttons[9][8].setLabel("Y");
     buttons[9][9].setLabel("o");
     buttons[9][10].setLabel("u");
